@@ -1,5 +1,6 @@
 import os
-from flask import Flask,jsonify
+from flask import Flask,jsonify,abort,request
+from dateutil import parser
 from models import setup_db, Movie, Actor, Cast
 from flask_cors import CORS
 from auth.auth import AuthError, requires_auth, AUTH0_DOMAIN, API_AUDIENCE, AUTH0_CLIENT_ID, AUTH0_CALLBACK_URL
@@ -33,6 +34,18 @@ def create_app(test_config=None):
         else:
             formatted_movies = [movie.short() for movie in movies]       
         return jsonify({ 'success': True, 'movies': formatted_movies })
+    
+
+    @app.route('/actors', methods=['GET'])
+    # @requires_auth('get:actors') - payload
+    def get_actors():
+        actors = Actor.query.all()
+        if actors is None:
+            formatted_actors = []
+        else:
+            formatted_actors = [actor.short() for actor in actors]       
+        return jsonify({ 'success': True, 'actors': formatted_actors })
+
 
     return app
 
