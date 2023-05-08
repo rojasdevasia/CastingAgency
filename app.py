@@ -3,7 +3,7 @@ from flask import Flask,jsonify,abort,request
 from dateutil import parser
 from models import setup_db, Movie, Actor, Cast
 from flask_cors import CORS
-from auth.auth import AuthError, requires_auth
+from auth.auth import AuthError, requires_auth,AUTH0_DOMAIN, API_AUDIENCE, AUTH0_CLIENT_ID, AUTH0_CALLBACK_URL
 
 #Udacity-Capstone-Casting Agency
 def create_app(test_config=None):
@@ -31,6 +31,10 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
         response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
         return response
+
+    @app.route('/auth')
+    def authenticate():
+        return jsonify({ 'auth-url': f'https://{AUTH0_DOMAIN}/authorize?audience={API_AUDIENCE}&response_type=token&client_id={AUTH0_CLIENT_ID}&redirect_uri={AUTH0_CALLBACK_URL}' })    
 
     # Get movies
     @app.route('/movies', methods=['GET'])
@@ -194,7 +198,33 @@ def create_app(test_config=None):
      except:
           abort(422)
 
+    # Error handlers
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify(
+            { "success": False,  
+             "error": 400, 
+             "message": "Bad Request" }), 400
 
+    @app.errorhandler(401)
+    def unauthorized_error(error):
+        return jsonify(
+            { "success": False, 
+             "error": 401, 
+             "message": "Unauthorized Access" }), 401
+
+    @app.errorhandler(404)
+    def not_found_error(error):
+        return jsonify(
+            { "success": False, 
+             "error": 404, 
+             "message": "Not Found" }), 404
+
+    @app.errorhandler(500)
+    def internal_error(error):
+        return jsonify(
+            { "success": False, 
+             "error": 500, "message": "Internal Server Error" }), 500
 
     return app
 
