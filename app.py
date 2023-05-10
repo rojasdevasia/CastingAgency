@@ -14,12 +14,7 @@ def create_app(test_config=None):
 
     @app.route('/')
     def get_greeting():
-        # excited = os.environ['EXCITED']
-        # greeting = "Hello" 
-        # if excited == 'true': 
-        #     greeting = greeting + "!!!!! You are doing great in this Udacity project."
-        # return greeting
-        return { 'Hello!!!' }
+        return { "Hello !!!" }
 
     # @app.route('/coolkids')
     # def be_cool():
@@ -31,10 +26,6 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
         response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
         return response
-
-    @app.route('/')
-    def index():
-        return{"Hello World!!"}
 
     @app.route('/auth')
     def authenticate():
