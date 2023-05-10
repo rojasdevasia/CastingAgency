@@ -6,11 +6,17 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'dev-i20z2y54qtc46c2h.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'Casting-Agency'
-AUTH0_CLIENT_ID = 'PFTOyhIqDkNeOO3x8I2KzOFfeitITWHw'
-AUTH0_CALLBACK_URL = 'http://127.0.0.1:5000/'
+# AUTH0_DOMAIN = 'dev-i20z2y54qtc46c2h.us.auth0.com'
+# ALGORITHMS = ['RS256']
+# API_AUDIENCE = 'Casting-Agency'
+# AUTH0_CLIENT_ID = 'PFTOyhIqDkNeOO3x8I2KzOFfeitITWHw'
+# AUTH0_CALLBACK_URL = 'http://127.0.0.1:5000/'
+
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+ALGORITHMS = os.environ['ALGORITHMS']
+API_AUDIENCE = os.environ['API_AUDIENCE']
+AUTH0_CLIENT_ID = os.environ['AUTH0_CLIENT_ID']
+AUTH0_CALLBACK_URL = os.environ['AUTH0_CALLBACK_URL']
 
 ## AuthError Exception
 '''
