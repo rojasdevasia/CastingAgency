@@ -10,7 +10,8 @@ if database_path.startswith("postgres://"):
   database_path = database_path.replace("postgres://", "postgresql://", 1)
 
 # database_path = 'postgresql://{}:{}@{}/{}'.format('postgres','postgres','localhost:5432', 'casting')
-database_path = 'postgresql://{}:{}@{}/{}'.format(DB_USER,DB_PASSWORD,'localhost:5432', DB_NAME)
+# database_path = 'postgresql://{}:{}@{}/{}'.format(DB_USER,DB_PASSWORD,'localhost:5432', DB_NAME)
+
 db = SQLAlchemy()
 
 """
