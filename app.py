@@ -32,6 +32,10 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
         return response
 
+    @app.route('/')
+    def index():
+        return{"Hello World!!"}
+
     @app.route('/auth')
     def authenticate():
         return jsonify({ 'auth-url': f'https://{AUTH0_DOMAIN}/authorize?audience={API_AUDIENCE}&response_type=token&client_id={AUTH0_CLIENT_ID}&redirect_uri={AUTH0_CALLBACK_URL}' })    
