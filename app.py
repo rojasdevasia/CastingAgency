@@ -13,12 +13,12 @@ def create_app(test_config=None):
     CORS(app)
 
     @app.route('/')
-    def get_greeting():
-        return { "Hello !!!" }
+    def index():
+        return  "Hello !!!" 
 
-    # @app.route('/coolkids')
-    # def be_cool():
-    #     return "Be cool, man, be coooool! You're almost a FSND grad!"
+    @app.route('/coolkids')
+    def be_cool():
+        return "Be cool, man, be coooool! You're almost a FSND grad!"
 
     #CORS headers
     @app.after_request
