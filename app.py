@@ -88,8 +88,11 @@ def create_app(test_config=None):
         body = request.get_json()
         try:
             name = body.get('name', None)
+            print(name)
             age = body.get('age', None)
+            print(age)
             gender = body.get('gender', None)
+            print(gender)
             actor = Actor(name = name, age = age, gender = gender)  
             actor.insert()
             
