@@ -226,7 +226,7 @@ def create_app(test_config=None):
     
     @app.errorhandler(422)
     def unprocessable_error(error):
-        print(error.error['description'])
+        # print(error.error['description'])
         return jsonify(
             { "success": False, 
              "error": 422, "message": "Unprocessable Error" }), 422
